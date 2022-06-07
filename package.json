@@ -16,7 +16,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node app.mjs",
     "stop": "pm2 stop \"content-parser\"",
-    "start": "pm2 start app.mjs --name \"content-parser\""
+    "start": "pm2 start app.mjs --name \"content-parser\"",
+    "restart": "pm2 restart \"content-parser\""
   },
   "repository": {
     "type": "git",
