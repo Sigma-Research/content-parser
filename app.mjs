@@ -1,17 +1,22 @@
-// const Koa = require('koa');
 import Koa from 'koa';
+import Router from 'koa-router';
+import body from 'koa-body';
+
 import { parse } from "@unified-latex/unified-latex-util-parse";
 
 const app = new Koa();
+const router = new Router();
 
-// logger
+app.use(body({
+    jsonLimit: '3kb',
+}));
+
 app.use(async (ctx, next) => {
     await next();
     const rt = ctx.response.get('X-Response-Time');
     console.log(`${ctx.method} ${ctx.url} - ${rt}`);
 });
 
-// x-response-time
 app.use(async (ctx, next) => {
     const start = Date.now();
     await next();
@@ -19,10 +24,15 @@ app.use(async (ctx, next) => {
     ctx.set('X-Response-Time', `${ms}ms`);
 });
 
-// response
-app.use(async ctx => {
-    const t = parse('f(\\delta)=\\frac{1}{\\sqrt{2 \\pi} \\sigma} \\cdot \\mathrm{e}^{-\\frac{\\delta^2}{2 t^2}}');
-    ctx.body = t;
+router.get('/', async (ctx, next) => {
+    ctx.response.body = 'hello content-parser';
 });
+
+router.post('/api/latex-parser', async (ctx, next) => {
+    const { latex } = ctx.request.body;
+    ctx.response.body = parse(latex);
+});
+
+app.use(router.routes());
 
 app.listen(3000);

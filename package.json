@@ -1,0 +1,31 @@
+{
+  "name": "content-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@unified-latex/unified-latex-util-parse": "^1.0.12",
+    "fs": "^0.0.1-security",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
+    "koa-router": "^10.1.1",
+    "pm2": "^5.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app.mjs",
+    "stop": "pm2 stop \"content-parser\"",
+    "start": "pm2 start app.mjs --name \"content-parser\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sigma-Research/content-parser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sigma-Research/content-parser/issues"
+  },
+  "homepage": "https://github.com/Sigma-Research/content-parser#readme"
+}
